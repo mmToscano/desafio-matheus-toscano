@@ -2,7 +2,6 @@ import { CaixaDaLanchonete } from "./caixa-da-lanchonete.js";
 
 describe('CaixaDaLanchonete', () => {
 
-
     const validaTeste = (formaDePagamento, resultadoEsperado, itens) => {
         const resultado = new CaixaDaLanchonete()
             .calcularValorDaCompra(formaDePagamento, itens);

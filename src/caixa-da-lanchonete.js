@@ -9,16 +9,9 @@ let lanchesJson = [
     {codigo: "combo2", descricao: "1 Café e 1 Sanduíche", valor: 7.50, extra: null}
 ];
 
-['cafe,1','chantily,1']
-
-
-//fazer:
-//
-
 class CaixaDaLanchonete {
 
     calcularValorDaCompra(metodoDePagamento, itens) {
-        //retornar o lanche
         let lanchesTemp = [];
         let quantidadesDosLanches = [];
         let lanchesExtra = [];
@@ -26,7 +19,7 @@ class CaixaDaLanchonete {
         let desconto = 0;
 
         //verificar se existem itens pedidos
-        if(itens == null){
+        if(itens.length == 0){
             return "Não há itens no carrinho de compra!";
         }
 
@@ -47,6 +40,10 @@ class CaixaDaLanchonete {
 
         //retorna os itens respectivos
         lanchesTemp = this.retornarItens(itens);
+
+        if(lanchesTemp == false){
+            return "Item inválido!";
+        }
 
         //verificar se houve item extra
         for(let i in lanchesTemp){
@@ -84,7 +81,7 @@ class CaixaDaLanchonete {
         
         
         //return (valor + (desconto/100 * valor));
-        return "R$ " + valor.toFixed(2).toString().replace(".", ",");
+        return "R$ " + (valor+(desconto/100*valor)).toFixed(2).toString().replace(".", ",");
     }
 
 
@@ -99,8 +96,9 @@ class CaixaDaLanchonete {
                 }
             }
         }
+        //verifica a validade dos itens
         if(itens.length != lanchesTemp.length){
-            return "Item inválido!";
+            return false;
         }
         return lanchesTemp;
     }
@@ -132,8 +130,5 @@ class CaixaDaLanchonete {
 }
 
 let caixa = new CaixaDaLanchonete();
-console.log(caixa.calcularValorDaCompra('debito', ['cafe,1', 'chantily,1']))
-//console.log(caixa.existeNo(lanchesJson, {codigo: "coco", descricao: "Cafe", valor: 3.00, extra: null}));
-
 
 export { CaixaDaLanchonete };
